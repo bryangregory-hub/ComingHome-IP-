@@ -38,6 +38,9 @@ public class SamplePlayer : MonoBehaviour
 
     private string nextState;
 
+    [SerializeField]
+    Chaser genericChaser;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +57,8 @@ public class SamplePlayer : MonoBehaviour
 
         CheckRotation();
         InteractionRaycast();
+
+        
     }
 
     private void InteractionRaycast()

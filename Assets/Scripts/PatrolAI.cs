@@ -84,8 +84,8 @@ public class PatrolAI : MonoBehaviour
     /// Used to tell the AI that it sees a player
     /// </summary>
     /// <param name="seenPlayer">The player that was seen</param>
-    public void SeePlayer(Transform seenPlayer)
-    {
+        public void SeePlayer(Transform seenPlayer)
+        {
         // Store the seen player and change the state of the AI
         playerToChase = seenPlayer;
         nextState = "ChasingPlayer";

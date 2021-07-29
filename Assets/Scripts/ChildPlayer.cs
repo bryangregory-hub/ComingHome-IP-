@@ -19,7 +19,7 @@ public class ChildPlayer : SamplePlayer
     //{
     //    Debug.Log("TEST");
     //}
-
+    
     protected override void CollisionFunction(Collision collision)
     {
         Debug.Log("OVERRIDDEN");
