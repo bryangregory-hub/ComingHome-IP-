@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class PatrolAI : MonoBehaviour
 {
@@ -53,11 +54,20 @@ public class PatrolAI : MonoBehaviour
     /// The current player that is being seen by the AI
     /// </summary>
     private Transform playerToChase;
-
+    /// <summary>
+    ///  This is to check if this is a patrol or a child ai
+    /// </summary>
+    [SerializeField]
+    private bool Child;
+    public Text following;
     private void Awake()
     {
         // Get the attached NavMeshAgent and store it in agentComponent
         agentComponent = GetComponent<NavMeshAgent>();
+
+        /// <summary>
+        ///  helps identify if the obj is a child and set speed to 3
+        
     }
 
     // Start is called before the first frame update
@@ -77,6 +87,12 @@ public class PatrolAI : MonoBehaviour
             StopCoroutine(currentState);
             currentState = nextState;
             StartCoroutine(currentState);
+        }
+        if (Child == true)
+        {
+            GetComponent<NavMeshAgent>().speed = 3f;
+            following.text = (currentState);
+
         }
     }
 
@@ -112,9 +128,12 @@ public class PatrolAI : MonoBehaviour
 
             // The AI will wait for a few seconds before continuing.
             yield return new WaitForSeconds(idleTime);
-
+            if (Child == false)
+            {
+                nextState = "Patrolling";
+            }
             // Change to Patrolling state.
-            nextState = "Patrolling";
+            
         }
     }
 
@@ -124,6 +143,7 @@ public class PatrolAI : MonoBehaviour
     /// <returns></returns>
     IEnumerator Patrolling()
     {
+        
         // Set the checkpoint that this AI should move towards
         agentComponent.SetDestination(checkpoints[currentCheckpoint].position);
         bool hasReached = false;
@@ -162,10 +182,11 @@ public class PatrolAI : MonoBehaviour
     /// <returns></returns>
     IEnumerator ChasingPlayer()
     {
+        
         while(currentState == "ChasingPlayer")
         {
             // This while loop will contain the ChasingPlayer behaviour
-
+            
             yield return null;
                
             // If there is a player to chase, keep chasing the player
@@ -177,7 +198,11 @@ public class PatrolAI : MonoBehaviour
             else 
             {
                 nextState = "Idle";
+                
             }
-        }
+            
+        } 
+        
+
     }
 }

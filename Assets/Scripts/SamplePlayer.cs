@@ -41,10 +41,14 @@ public class SamplePlayer : MonoBehaviour
     [SerializeField]
     Chaser genericChaser;
 
+   
     // Start is called before the first frame update
     void Start()
     {
         nextState = "Idle";
+        //center the mouse
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -58,6 +62,7 @@ public class SamplePlayer : MonoBehaviour
         CheckRotation();
         InteractionRaycast();
 
+        
         
     }
 
@@ -167,4 +172,19 @@ public class SamplePlayer : MonoBehaviour
     {
         Debug.Log("hi");
     }
+    /// <summary>
+    /// this helps use is inside program and if true center the mouse 
+    /// </summary>
+    
+    void OnApplicationFocus(bool focus)
+    {
+        if (focus == true)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+    }
+
+
 }
+
