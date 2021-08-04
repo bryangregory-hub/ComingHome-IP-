@@ -4,6 +4,7 @@
     "m_Dictionary": {
         "m_DictionaryValues": [
             {
+<<<<<<< HEAD
                 "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "experimental.enabled",
                 "value": "{\"m_Value\":false}"
@@ -24,6 +25,8 @@
                 "value": "{\"m_Value\":false}"
             },
             {
+=======
+>>>>>>> 8ee214de459f53f96f17128b6b76d9b2925973c8
                 "type": "UnityEngine.ProBuilder.LogLevel, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "log.level",
                 "value": "{\"m_Value\":3}"
