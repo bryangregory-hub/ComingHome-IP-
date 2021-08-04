@@ -41,12 +41,9 @@ public class SamplePlayer : MonoBehaviour
     [SerializeField]
     Chaser genericChaser;
 
-<<<<<<< HEAD:Assets/Scripts/player/SamplePlayer.cs
     
     InteractableObject stateCheck;
 
-=======
->>>>>>> 8ee214de459f53f96f17128b6b76d9b2925973c8:Assets/Scripts/SamplePlayer.cs
    
     // Start is called before the first frame update
     void Start()
@@ -55,13 +52,10 @@ public class SamplePlayer : MonoBehaviour
         //center the mouse
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-<<<<<<< HEAD:Assets/Scripts/player/SamplePlayer.cs
 
         stateCheck = GetComponent<InteractableObject>();
 
        
-=======
->>>>>>> 8ee214de459f53f96f17128b6b76d9b2925973c8:Assets/Scripts/SamplePlayer.cs
     }
 
     // Update is called once per frame
@@ -204,21 +198,6 @@ public class SamplePlayer : MonoBehaviour
             Cursor.visible = false;
         }
     }
-<<<<<<< HEAD:Assets/Scripts/player/SamplePlayer.cs
-=======
-    /// <summary>
-    /// this helps use is inside program and if true center the mouse 
-    /// </summary>
-    
-    void OnApplicationFocus(bool focus)
-    {
-        if (focus == true)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-    }
->>>>>>> 8ee214de459f53f96f17128b6b76d9b2925973c8:Assets/Scripts/SamplePlayer.cs
 
 
 }
