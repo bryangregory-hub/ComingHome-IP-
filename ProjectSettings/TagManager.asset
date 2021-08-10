@@ -5,17 +5,18 @@ TagManager:
   serializedVersion: 2
   tags:
   - door 1
-  - enemy
+  - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Post Processing
   - Water
   - UI
   - Interactable
-  - 
-  - 
+  - Walls
+  - Notes
   - 
   - 
   - 

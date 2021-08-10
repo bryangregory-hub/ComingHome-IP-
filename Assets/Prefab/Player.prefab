@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1011337413
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1011337414}
+  m_Layer: 6
+  m_Name: Destination
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1011337414
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011337413}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.101, z: 2.289}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1662332010182363217}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1662332008920877107
 GameObject:
   m_ObjectHideFlags: 0
@@ -16,7 +46,7 @@ GameObject:
   - component: {fileID: 1662332008920877129}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,8 +143,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   rotationSpeed: 120
-  interactionDistance: 5
+  interactionDistance: 20
   playerCamera: {fileID: 1662332010182363222}
+  genericChaser: {fileID: 0}
+  enemy: {fileID: 0}
+  playerHealth: 100
+  pHealth: {fileID: 0}
+  health_pack: {fileID: 0}
+  plus_health: 20
+  enemy_hit: 0
+  lo_indi: {fileID: 0}
 --- !u!54 &1662332008920877129
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -158,9 +196,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1662332010182363220}
   m_LocalRotation: {x: 0.059709102, y: -0, z: -0, w: 0.99821585}
-  m_LocalPosition: {x: 0, y: 0.681, z: 0.334}
+  m_LocalPosition: {x: 0, y: 0.761, z: -0.191}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1011337414}
   m_Father: {fileID: 1662332008920877134}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 6.846, y: 0, z: 0}

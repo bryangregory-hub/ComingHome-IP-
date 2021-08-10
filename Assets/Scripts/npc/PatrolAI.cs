@@ -21,6 +21,8 @@ public class PatrolAI : MonoBehaviour
     /// <summary>
     /// This stores the current state that the AI is in
     /// </summary>
+    /// 
+    [Header("Enemy stats")]
     public string currentState;
 
     /// <summary>
@@ -58,8 +60,21 @@ public class PatrolAI : MonoBehaviour
     ///  This is to check if this is a patrol or a child ai
     /// </summary>
     [SerializeField]
-    private bool Child;
+    public int enemyDmg;
+    
     public Text following;
+
+    Animator animator;
+
+    public float e_slow;
+    [Header("Player")]
+    public SamplePlayer player;
+    public float _pHealth;
+    [Header("Robot")]
+    public  bool Child;
+
+    private bool isColide = true;
+
     private void Awake()
     {
         // Get the attached NavMeshAgent and store it in agentComponent
@@ -67,7 +82,7 @@ public class PatrolAI : MonoBehaviour
 
         /// <summary>
         ///  helps identify if the obj is a child and set speed to 3
-        
+
     }
 
     // Start is called before the first frame update
@@ -75,13 +90,21 @@ public class PatrolAI : MonoBehaviour
     {
         // Set the starting state as Idle
         nextState = "Idle";
+        animator = GetComponent<Animator>();
+
+        _pHealth = player.GetComponent<SamplePlayer>().playerHealth;
+        if (Child == true)
+        {
+            GetComponent<NavMeshAgent>().speed = 3f;
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
         // Check if the AI should change to a new state
-        if(nextState != currentState)
+        if (nextState != currentState)
         {
             // Stop the current running coroutine first before starting a new one.
             StopCoroutine(currentState);
@@ -90,21 +113,36 @@ public class PatrolAI : MonoBehaviour
         }
         if (Child == true)
         {
-            GetComponent<NavMeshAgent>().speed = 3f;
+            
             following.text = (currentState);
 
         }
+        if (animator.GetBool("IsAttack"))
+        {
+            GetComponent<NavMeshAgent>().speed = 0;
+        }
+        else if (animator.GetBool("IsRunning"))
+        {
+            GetComponent<NavMeshAgent>().speed = 4;
+        }
     }
+
 
     /// <summary>
     /// Used to tell the AI that it sees a player
     /// </summary>
     /// <param name="seenPlayer">The player that was seen</param>
-        public void SeePlayer(Transform seenPlayer)
-        {
+    public void SeePlayer(Transform seenPlayer)
+    {
         // Store the seen player and change the state of the AI
         playerToChase = seenPlayer;
         nextState = "ChasingPlayer";
+        if (Child == true)
+        {
+            animator.SetBool("IsAlone", true);
+        }
+
+
     }
 
     /// <summary>
@@ -114,6 +152,10 @@ public class PatrolAI : MonoBehaviour
     {
         // Set the seen player to null
         playerToChase = null;
+        if (Child == true)
+        {
+            animator.SetBool("IsAlone", false);
+        }
     }
 
     /// <summary>
@@ -121,8 +163,8 @@ public class PatrolAI : MonoBehaviour
     /// </summary>
     /// <returns></returns>
     IEnumerator Idle()
-    { 
-        while(currentState == "Idle")
+    {
+        while (currentState == "Idle")
         {
             // This while loop will contain the Idle behaviour
 
@@ -133,7 +175,7 @@ public class PatrolAI : MonoBehaviour
                 nextState = "Patrolling";
             }
             // Change to Patrolling state.
-            
+
         }
     }
 
@@ -143,21 +185,21 @@ public class PatrolAI : MonoBehaviour
     /// <returns></returns>
     IEnumerator Patrolling()
     {
-        
+
         // Set the checkpoint that this AI should move towards
         agentComponent.SetDestination(checkpoints[currentCheckpoint].position);
         bool hasReached = false;
 
-        while(currentState == "Patrolling")
+        while (currentState == "Patrolling")
         {
             // This while loop will contain the Patrolling behaviour
 
             yield return null;
-            if(!hasReached)
+            if (!hasReached)
             {
                 // If agent has not reached destination, do the following code
                 // Check that the agent is at an acceptable stopping distance from the destination
-                if(agentComponent.remainingDistance <= agentComponent.stoppingDistance)
+                if (agentComponent.remainingDistance <= agentComponent.stoppingDistance)
                 {
                     // We want to make sure this only happens once.
                     hasReached = true;
@@ -167,7 +209,7 @@ public class PatrolAI : MonoBehaviour
                     ++currentCheckpoint;
 
                     // A check so that the index does not exceed the length of the checkpoints array
-                    if(currentCheckpoint >= checkpoints.Length)
+                    if (currentCheckpoint >= checkpoints.Length)
                     {
                         currentCheckpoint = 0;
                     }
@@ -182,27 +224,111 @@ public class PatrolAI : MonoBehaviour
     /// <returns></returns>
     IEnumerator ChasingPlayer()
     {
-        
-        while(currentState == "ChasingPlayer")
+
+        while (currentState == "ChasingPlayer")
         {
             // This while loop will contain the ChasingPlayer behaviour
-            
+
+
             yield return null;
-               
+
             // If there is a player to chase, keep chasing the player
-            if(playerToChase != null)
+            if (playerToChase != null)
             {
                 agentComponent.SetDestination(playerToChase.position);
             }
             // If not, move back to the Idle state
-            else 
+            else
             {
                 nextState = "Idle";
-                
+
             }
-            
-        } 
-        
+
+        }
+
 
     }
+    private IEnumerator _Atk()
+    {
+
+
+        yield return new WaitForSeconds(1.7f);
+
+        player.got_hit();
+        yield return new WaitForSeconds(0.9f);
+        isColide = true;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (Child == true && collision.gameObject.tag == "Player")
+        {
+            animator.SetBool("IsAlone", false);
+            
+            gameObject.GetComponent<NavMeshAgent>().speed = 0;
+        }
+       
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (Child == true&& collision.gameObject.tag=="Player")
+        {
+            animator.SetBool("IsAlone", true);
+
+            gameObject.GetComponent<NavMeshAgent>().speed = 3;
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+
+            GetComponent<NavMeshAgent>().speed = 0;
+            animator.SetBool("IsRunning", false);
+            animator.SetBool("IsScream", false);
+            animator.SetBool("IsAttack", true);
+            animator.SetBool("Idle", false);
+
+            if (isColide == true)
+            {
+                player.enemy_hit = 25;
+                isColide = false;
+                StartCoroutine("_Atk");
+
+            }
+
+
+        }
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+
+        GetComponent<NavMeshAgent>().speed = 4;
+        animator.SetBool("IsRunning", true);
+        animator.SetBool("IsScream", false);
+        animator.SetBool("IsAttack", false);
+        animator.SetBool("Idle", false);
+        if (other.gameObject.tag == "Player")
+        {
+
+            isColide = false;
+
+            player.enemy_hit = 0;
+
+
+        }
+    }
+
+
+    public void slow()
+    {
+        print("eslow");
+    }
+
+
+
+
 }
+
+

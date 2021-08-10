@@ -12,12 +12,17 @@ Date Created: 09/06/2021
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SamplePlayer : MonoBehaviour
 {
     /// <summary>
     /// The distance this player will travel per second.
     /// </summary>
+    /// 
+    [Header("Chara Variables")]
+
+
     [SerializeField]
     private float moveSpeed;
 
@@ -41,10 +46,17 @@ public class SamplePlayer : MonoBehaviour
     [SerializeField]
     Chaser genericChaser;
 
-    
-    InteractableObject stateCheck;
 
-   
+    InteractableObject stateCheck;
+    public GameObject enemy;
+    [Header("Chara stats")]
+    public float playerHealth;
+    public Text pHealth;
+    public GameObject health_pack;
+    
+    public  float plus_health;
+    public float enemy_hit;
+    public Image lo_indi;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,8 +67,12 @@ public class SamplePlayer : MonoBehaviour
 
         stateCheck = GetComponent<InteractableObject>();
 
-       
+
+        lo_indi = lo_indi.GetComponent<Image>();
+
+
     }
+    
 
     // Update is called once per frame
     void Update()
@@ -68,9 +84,20 @@ public class SamplePlayer : MonoBehaviour
 
         CheckRotation();
         InteractionRaycast();
+        Ui();
 
-        
-        
+        //_ph = enemy.GetComponent<PatrolAI>()._pHealth;
+        if (playerHealth <= 50)
+        {
+            
+            lo_indi.gameObject.SetActive(true);
+
+        }
+        else if (playerHealth >= 51)
+        {
+            lo_indi.gameObject.SetActive(false);
+        }
+       
     }
 
     private void InteractionRaycast()
@@ -79,6 +106,7 @@ public class SamplePlayer : MonoBehaviour
                     playerCamera.transform.position + playerCamera.transform.forward * interactionDistance);
 
         int layermask = 1 << LayerMask.NameToLayer("Interactable");
+        int layermask2 = 1 << LayerMask.NameToLayer("Notes");
 
         RaycastHit hitinfo;
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward,
@@ -88,16 +116,34 @@ public class SamplePlayer : MonoBehaviour
             // do stuff here
             if (Input.GetKeyDown(KeyCode.E))
             {
-                
+
                 hitinfo.transform.GetComponent<InteractableObject>().Interact();
-                
-                
+
+
             }
+
+
+
+        }
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward,
+            out hitinfo, interactionDistance, layermask2))
+        {
             
-            
-            
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                hitinfo.transform.GetComponent<InteractableObject>().Story();
+                hitinfo.transform.GetComponent<InteractableObject>()._hovr = true;
+            }
+            if (Input.GetKeyUp(KeyCode.E))
+            {
+                hitinfo.transform.GetComponent<InteractableObject>().Story();
+                hitinfo.transform.GetComponent<InteractableObject>()._hovr = false;
+            }
         }
         
+
+
     }
 
     /// <summary>
@@ -114,9 +160,9 @@ public class SamplePlayer : MonoBehaviour
 
     private IEnumerator Idle()
     {
-        while(currentState == "Idle")
+        while (currentState == "Idle")
         {
-            if(Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
             {
                 nextState = "Moving";
             }
@@ -162,7 +208,7 @@ public class SamplePlayer : MonoBehaviour
 
         Vector3 movementVector = xMovement + zMovement;
 
-        if(movementVector.sqrMagnitude > 0)
+        if (movementVector.sqrMagnitude > 0)
         {
             movementVector *= moveSpeed * Time.deltaTime;
             newPos += movementVector;
@@ -180,6 +226,14 @@ public class SamplePlayer : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         CollisionFunction(collision);
+        if (collision.gameObject.tag=="Bullet")
+        {
+            playerHealth -= 10;
+        }
+        if (collision.gameObject.tag=="door 1")
+        {
+            print("door lock");
+        }
     }
 
     protected virtual void CollisionFunction(Collision collision)
@@ -189,7 +243,7 @@ public class SamplePlayer : MonoBehaviour
     /// <summary>
     /// this helps use is inside program and if true center the mouse 
     /// </summary>
-    
+
     void OnApplicationFocus(bool focus)
     {
         if (focus == true)
@@ -198,7 +252,21 @@ public class SamplePlayer : MonoBehaviour
             Cursor.visible = false;
         }
     }
-
+    public void got_hit()
+    {
+        print("geting hit");
+        playerHealth -= enemy_hit;
+    }
+    void Ui()
+    {
+        
+        pHealth.text = "Health: " + playerHealth;
+    }
+    public void heal()
+    {
+        print("hi");
+        playerHealth += plus_health;
+    }
 
 }
 
