@@ -114,7 +114,7 @@ public class PatrolAI : MonoBehaviour
         if (Child == true)
         {
             
-            following.text = (currentState);
+            following.text = "-Get the robot out with you robot is currently " + (currentState);
 
         }
         if (animator.GetBool("IsAttack"))
@@ -136,7 +136,7 @@ public class PatrolAI : MonoBehaviour
     {
         // Store the seen player and change the state of the AI
         playerToChase = seenPlayer;
-        nextState = "ChasingPlayer";
+        nextState = "Following";
         if (Child == true)
         {
             animator.SetBool("IsAlone", true);
@@ -222,10 +222,10 @@ public class PatrolAI : MonoBehaviour
     /// The behaviour of the AI when in the ChasingPlayer state
     /// </summary>
     /// <returns></returns>
-    IEnumerator ChasingPlayer()
+    IEnumerator Following()
     {
 
-        while (currentState == "ChasingPlayer")
+        while (currentState == "Following")
         {
             // This while loop will contain the ChasingPlayer behaviour
 
@@ -317,6 +317,13 @@ public class PatrolAI : MonoBehaviour
             player.enemy_hit = 0;
 
 
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag=="exit"&&Child ==true)
+        {
+            print("robot home");
         }
     }
 

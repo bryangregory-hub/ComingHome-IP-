@@ -23,8 +23,9 @@ public class InteractableObject : MonoBehaviour
         oneTime,
         btnDoor,
         Story,
+        StoryWithQuest,
         btnDactvSecurity,
-        btnEtc,
+        btnFloorOpen,
        
     }
     // the distance to spawn the object;
@@ -37,16 +38,18 @@ public class InteractableObject : MonoBehaviour
     public GameObject door;
     [Header("Story and monolog")]
     public bool _hovr=false;
+    public GameObject quest;
     public GameObject storyPopUp;
     [Header("Sentury Turret")]
     public GameObject Turret;
     void Start()
     {
-        theDest = GameObject.Find("Destination").transform;
+        
         
     }
     private void Update()
     {
+        theDest = GameObject.Find("Destination").transform;
         if (Input.GetKeyUp(KeyCode.E)&& currentState == whichType.pickUp)
         {
             print("keyup");
@@ -59,33 +62,50 @@ public class InteractableObject : MonoBehaviour
     {
         if (currentState == whichType.Story)
         {
-            if (_hovr == false)
+            if (_hovr == true)
             {
                 print("story");
                 storyPopUp.SetActive(true);
             }
-            else if (_hovr == true)
+            else if (_hovr == false)
             {
                 print("notstory");
                 storyPopUp.SetActive(false);
             }
 
         }
+        if (currentState == whichType.StoryWithQuest)
+        {
+            if (_hovr == false)
+            {
+                print("story");
+                storyPopUp.SetActive(true);
+                quest.SetActive(true);
+            }
+            else if (_hovr == true)
+            {
+                print("notstory");
+                storyPopUp.SetActive(false);
+                
+            }
 
-        
+        }
+
+
     }
     public void Interact()
     {
         //Debug.Log(name + " has been interacted with.");
         if (currentState == whichType.pickUp)
         {
+
+            GetComponent<Rigidbody>().isKinematic = true;
             
-            
-            GetComponent<BoxCollider>().enabled = false;
             GetComponent<Rigidbody>().useGravity = false;
-            this.transform.parent = GameObject.Find("Destination").transform;
+            
             this.transform.position = theDest.position;
             this.transform.rotation = theDest.rotation;
+            this.transform.parent = GameObject.Find("Destination").transform;
         }
         else if (currentState == whichType.oneTime)
         {
@@ -101,7 +121,7 @@ public class InteractableObject : MonoBehaviour
         {
             _btnDactvSecurity();
         }
-        else if (currentState == whichType.btnEtc)
+        else if (currentState == whichType.btnFloorOpen)
         {
             _btnEtc();
         }
@@ -112,7 +132,8 @@ public class InteractableObject : MonoBehaviour
     {
         this.transform.parent = null;
         GetComponent<Rigidbody>().useGravity = true;
-        GetComponent<BoxCollider>().enabled = true;
+        GetComponent<Rigidbody>().isKinematic = false;
+        
     }
 
     public void _btnDoor()

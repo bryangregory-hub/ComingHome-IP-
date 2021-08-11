@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 3517254736644498939}
   - component: {fileID: 3517254736644498936}
   - component: {fileID: 3517254736644498937}
-  - component: {fileID: 3517254736644498918}
   - component: {fileID: 3517254736644498919}
   - component: {fileID: 3517254736644498916}
+  - component: {fileID: 1145599740558420572}
   m_Layer: 6
   m_Name: Button
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3517254736644498917}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -16.82, y: 0.875, z: 0.83}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 17.292013, y: 17.292013, z: 17.292013}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3517254736644498917}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -4933064594372674688, guid: d76ae53c1c9faec4d964105e476e560a, type: 3}
 --- !u!23 &3517254736644498937
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: cd3ed187497a4ab4b800c206fa9e1bfa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,19 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3517254736644498918
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3517254736644498917}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3517254736644498919
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -126,4 +113,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 2
+  Player: {fileID: 0}
+  heal_p: 0
   door: {fileID: 0}
+  _hovr: 0
+  storyPopUp: {fileID: 0}
+  Turret: {fileID: 0}
+--- !u!65 &1145599740558420572
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3517254736644498917}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.01597207, y: 0.02, z: 0.02}
+  m_Center: {x: -0.007986035, y: 0, z: 0.01}

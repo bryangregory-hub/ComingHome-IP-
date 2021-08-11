@@ -24,7 +24,7 @@ public class SamplePlayer : MonoBehaviour
 
 
     [SerializeField]
-    private float moveSpeed;
+    public float moveSpeed;
 
     [SerializeField]
     private float rotationSpeed;
@@ -57,6 +57,7 @@ public class SamplePlayer : MonoBehaviour
     public  float plus_health;
     public float enemy_hit;
     public Image lo_indi;
+    public Transform des;
     // Start is called before the first frame update
     void Start()
     {
@@ -77,6 +78,7 @@ public class SamplePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        des = des.transform;
         if (nextState != currentState)
         {
             SwitchState();

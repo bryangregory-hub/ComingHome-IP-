@@ -87,9 +87,9 @@ public class Turret : MonoBehaviour
     
     void Shoot()
     {
-        print("hi");
+        print("hio");
         GameObject bulletMove=(GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-        //bulletMove.transform.rotation = bulletSpawn.transform.rotation;
+        bulletMove.transform.rotation = bulletSpawn.transform.rotation;
         Bullet bullet = bulletMove.GetComponent<Bullet>();
 
         if (bullet != null)

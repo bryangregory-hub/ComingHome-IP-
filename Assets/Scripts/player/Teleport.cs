@@ -12,6 +12,7 @@ public class Teleport : MonoBehaviour
     private void Start()
     {
         transScreen.SetActive(false);
+       
     }
     public void OnTriggerEnter(Collider other)
     {//teleports player back to the main room
@@ -25,7 +26,9 @@ public class Teleport : MonoBehaviour
     private IEnumerator Transition()
     {
         transScreen.SetActive(true);
+        thePlayer.GetComponent<SamplePlayer>().moveSpeed = 0;
         yield return new WaitForSeconds(1);
+        thePlayer.GetComponent<SamplePlayer>().moveSpeed = 5;
         transScreen.SetActive(false);
     }
     void Update()
