@@ -8,10 +8,24 @@ public class MainMenu : MonoBehaviour
     public void playgame()
     {
         //changes to title scene
-        SceneManager.LoadScene("Demo");
+        SceneManager.LoadScene("SampleScene");
     }
+
+    public void backtomenu()
+    {
+        //changes the scene to the title screen
+        SceneManager.LoadScene("MainMenuScreen");
+    }
+
+    public void deathscreen()
+    {
+        //changes to death screen scene
+        SceneManager.LoadScene("DeathMenu");
+    }
+
     public void QuitGame()
-    {//quits games
+    {
+        //closes the game
         Debug.Log("quit");
         Application.Quit();
     }

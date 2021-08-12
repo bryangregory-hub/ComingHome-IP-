@@ -20,7 +20,7 @@ public class Turret : MonoBehaviour
     public Transform bulletSpawn;
    
     private bool isNotWall;
-   
+    public bool so;
     // Start is called before the first frame update
     void Start()
     {

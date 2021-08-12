@@ -34,14 +34,17 @@ public class InteractableObject : MonoBehaviour
     public GameObject Player;
     [Header("Med kit")]
     public float heal_p;
-    [Header("Door animations")]
+    [Header("Door")]
     public GameObject door;
+    public GameObject DoorIndi;
     [Header("Story and monolog")]
     public bool _hovr=false;
     public GameObject quest;
     public GameObject storyPopUp;
     [Header("Sentury Turret")]
     public GameObject Turret;
+    public GameObject TurretQuestIndicator;
+    public GameObject turretInidi;
     void Start()
     {
         
@@ -139,14 +142,22 @@ public class InteractableObject : MonoBehaviour
     public void _btnDoor()
     {
         //smt happens
-        print("hoi");
+        
         Animator d=door.gameObject.GetComponent<Animator>();
         d.SetBool("Door_open", true);
+        DoorIndi.SetActive(true);
     }
     public void _btnDactvSecurity()
     {
         //smt happens
-        Turret.gameObject.GetComponent<Turret>().enabled = false;
+        Turret.gameObject.GetComponent<Turret>().range = 0;
+        
+        turretInidi.gameObject.SetActive(true);
+        
+            TurretQuestIndicator.gameObject.SetActive(false);   
+        
+        
+
     }
     public void _btnEtc()
     {

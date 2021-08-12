@@ -75,6 +75,7 @@ public class PatrolAI : MonoBehaviour
 
     private bool isColide = true;
 
+    public GameObject endBox;
     private void Awake()
     {
         // Get the attached NavMeshAgent and store it in agentComponent
@@ -321,7 +322,7 @@ public class PatrolAI : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag=="exit"&&Child ==true)
+        if (endBox.gameObject==this&&Child ==true)
         {
             print("robot home");
         }
