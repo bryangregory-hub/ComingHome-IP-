@@ -1,7 +1,7 @@
 /******************************************************************************
-Author: Elyas Chua-Aziz
+Author: Bryan and Nicholas
 Name of Class: PatrolAI.cs
-Description of Class: Controls the behaviour of the patrolling AI.
+Description of Class: Controls the behaviour of the patrolling AI for the the friendly and enemy.
 Date Created: 17/07/21
 ******************************************************************************/
 
@@ -96,7 +96,7 @@ public class PatrolAI : MonoBehaviour
         _pHealth = player.GetComponent<SamplePlayer>().playerHealth;
         if (Child == true)
         {
-            GetComponent<NavMeshAgent>().speed = 3f;
+            GetComponent<NavMeshAgent>().speed = 3.5f;
         }
 
     }
@@ -116,7 +116,7 @@ public class PatrolAI : MonoBehaviour
         {
             
             following.text = "-Get the robot out with you robot is currently " + (currentState);
-
+            
         }
         if (animator.GetBool("IsAttack"))
         {
@@ -249,6 +249,10 @@ public class PatrolAI : MonoBehaviour
 
 
     }
+    /// <summary>
+    /// this would could the dmg given to the player aft a certain amount of time is pass.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator _Atk()
     {
 
@@ -259,6 +263,10 @@ public class PatrolAI : MonoBehaviour
         yield return new WaitForSeconds(0.9f);
         isColide = true;
     }
+    /// <summary>
+    /// this would check if robot is touching player stop it.
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
         if (Child == true && collision.gameObject.tag == "Player")
@@ -267,17 +275,26 @@ public class PatrolAI : MonoBehaviour
             
             gameObject.GetComponent<NavMeshAgent>().speed = 0;
         }
-       
+        
+
     }
+    /// <summary>
+    /// if the robot is not touching the player move .
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionExit(Collision collision)
     {
         if (Child == true&& collision.gameObject.tag=="Player")
         {
             animator.SetBool("IsAlone", true);
 
-            gameObject.GetComponent<NavMeshAgent>().speed = 3;
+            gameObject.GetComponent<NavMeshAgent>().speed = 3.5f;
         }
     }
+    /// <summary>
+    /// if the ai is within range of the trigger follow the player
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -301,7 +318,10 @@ public class PatrolAI : MonoBehaviour
         }
 
     }
-
+    /// <summary>
+    /// if the player is away from the ai do smt
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerExit(Collider other)
     {
 
@@ -320,15 +340,11 @@ public class PatrolAI : MonoBehaviour
 
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (endBox.gameObject==this&&Child ==true)
-        {
-            print("robot home");
-        }
-    }
+  
 
-
+    /// <summary>
+    /// this is for test 
+    /// </summary>
     public void slow()
     {
         print("eslow");

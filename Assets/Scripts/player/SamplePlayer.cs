@@ -1,10 +1,10 @@
 /******************************************************************************
-Author: Elyas Chua-Aziz
+Author: Bryan Gregory
 
-Name of Class: DemoPlayer
+Name of Class: SamplePlayer
 
 Description of Class: This class will control the movement and actions of a 
-                        player avatar based on user input.
+                        player avatar based on user input it also work with raycasting to identify targets.
 
 Date Created: 09/06/2021
 ******************************************************************************/
@@ -13,7 +13,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class SamplePlayer : MonoBehaviour
 {
     /// <summary>
@@ -49,6 +49,7 @@ public class SamplePlayer : MonoBehaviour
 
     InteractableObject stateCheck;
     public GameObject enemy;
+    public GameObject robot;
     [Header("Chara stats")]
     public float playerHealth;
     public Text pHealth;
@@ -78,7 +79,7 @@ public class SamplePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        des = des.transform;
+         des = des.transform;
         if (nextState != currentState)
         {
             SwitchState();
@@ -99,9 +100,14 @@ public class SamplePlayer : MonoBehaviour
         {
             lo_indi.gameObject.SetActive(false);
         }
-       
+        if (playerHealth<=0)
+        {
+            SceneManager.LoadScene("DeathMenu");
+        }
     }
-
+    /// <summary>
+    /// this is to check if player is interacting with interactible items
+    /// </summary>
     private void InteractionRaycast()
     {
         Debug.DrawLine(playerCamera.transform.position,
@@ -224,7 +230,10 @@ public class SamplePlayer : MonoBehaviour
         }
 
     }
-
+    /// <summary>
+    /// checks if player is hit by bullet or in door
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
         CollisionFunction(collision);
@@ -236,8 +245,12 @@ public class SamplePlayer : MonoBehaviour
         {
             print("door lock");
         }
+        
     }
-
+    /// <summary>
+    /// this is to test collision
+    /// </summary>
+    /// <param name="collision"></param>
     protected virtual void CollisionFunction(Collision collision)
     {
         //Debug.Log("hi");
@@ -254,16 +267,27 @@ public class SamplePlayer : MonoBehaviour
             Cursor.visible = false;
         }
     }
+    /// <summary>
+    /// when the players gets attack by the ai monster
+    /// </summary>
+    /// 
     public void got_hit()
     {
         print("geting hit");
         playerHealth -= enemy_hit;
     }
+    /// <summary>
+    /// updates ui for the health
+    /// </summary>
     void Ui()
     {
         
         pHealth.text = "Health: " + playerHealth;
     }
+
+    /// <summary>
+    /// if player interact with the health kit 
+    /// </summary>
     public void heal()
     {
         print("hi");

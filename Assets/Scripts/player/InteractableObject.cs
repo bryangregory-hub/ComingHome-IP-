@@ -3,8 +3,8 @@ Author: Bryan Gregory
 
 Name of Class: InteractableObject
 
-Description of Class: This scripts helps identify why the player is interacting with
-if its a pick up and hold item or a one time pick up.
+Description of Class: This scripts helps identify when the player is interacting with an object
+if its a pick up/hold item or checks if anything is interacting with the objects in the game.
 
 Date Created: 03/08/2021
 ******************************************************************************/
@@ -26,7 +26,7 @@ public class InteractableObject : MonoBehaviour
         StoryWithQuest,
         btnDactvSecurity,
         btnFloorOpen,
-       
+        liftDoor
     }
     // the distance to spawn the object;
     private Transform theDest;
@@ -45,6 +45,7 @@ public class InteractableObject : MonoBehaviour
     public GameObject Turret;
     public GameObject TurretQuestIndicator;
     public GameObject turretInidi;
+    
     void Start()
     {
         
@@ -60,7 +61,9 @@ public class InteractableObject : MonoBehaviour
         }
         
 
-    }
+    }/// <summary>
+    /// this is to check base of enums if story display smt
+    /// </summary>
     public void Story()
     {
         if (currentState == whichType.Story)
@@ -93,9 +96,13 @@ public class InteractableObject : MonoBehaviour
             }
 
         }
+        
 
 
     }
+    /// <summary>
+    /// this would handle more of the other enums it can differ from holding the item, useing it one time, or a toggle
+    /// </summary>
     public void Interact()
     {
         //Debug.Log(name + " has been interacted with.");
@@ -128,7 +135,11 @@ public class InteractableObject : MonoBehaviour
         {
             _btnEtc();
         }
-        
+        else if (currentState == whichType.liftDoor)
+        {
+            door.GetComponent<Animator>().SetBool("Lift", true);
+            DoorIndi.SetActive(true);
+        }
 
     }
     public void NoInteract()

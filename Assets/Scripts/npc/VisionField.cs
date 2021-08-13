@@ -1,5 +1,5 @@
 /******************************************************************************
-Author: Elyas Chua-Aziz
+Author: Bryan
 Name of Class: VisionField.cs
 Description of Class: Controls the behaviour of the vision field attached to the AI
 Date Created: 17/07/21

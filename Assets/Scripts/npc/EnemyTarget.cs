@@ -1,3 +1,9 @@
+/******************
+ * Author: Nicholas Chen
+ * Name Of class: enemy targeting and death 
+ * Description of Class: This will control how much health the enemy has and how much damage it should take. Also controls the death of enemies.
+ * Date Created: 5/8/2021
+ */
 using UnityEngine;
 
 public class EnemyTarget : MonoBehaviour

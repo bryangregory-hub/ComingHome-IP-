@@ -1,8 +1,17 @@
+/******************
+ * Author: Nicholas Chen
+ * Name Of class:Main Menu
+ * Description of Class: This will control the button functions on the menu screens and the scene management
+ * Date Created: 10/8/2021
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+/// <summary>
+/// The scene that would display according to what button the user selects
+/// </summary>
 public class MainMenu : MonoBehaviour
 {
     public void playgame()

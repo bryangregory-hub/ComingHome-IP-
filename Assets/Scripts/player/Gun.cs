@@ -1,4 +1,9 @@
-
+/******************
+ * Author: Nicholas Chen
+ * Name Of class: Gun
+ * Description of Class: This would control the damage and range of gun. Also uses raycast for detecting and aiming at objects
+ * Date Created: 5/8/2021
+ */
 using UnityEngine;
 
 public class Gun : MonoBehaviour

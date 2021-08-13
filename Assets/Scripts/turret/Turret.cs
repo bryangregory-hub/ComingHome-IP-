@@ -1,3 +1,12 @@
+/******************************************************************************
+Author: Bryan Gregory, Charlene
+
+Name of Class: Turret
+
+Description of Class: This scripts would add turning function to the turret it handles everything from facing the player/monster and fire
+
+Date Created: 03/08/2021
+******************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -84,7 +93,9 @@ public class Turret : MonoBehaviour
         fireCountDown -= Time.deltaTime;
         inNotBlock();
     }
-    
+    /// <summary>
+    /// this would identify the shoot function where it would instantiate a bullet
+    /// </summary>
     void Shoot()
     {
         print("hio");
@@ -96,7 +107,9 @@ public class Turret : MonoBehaviour
             bullet.Seek(target);
 
     }
-
+    /// <summary>
+    /// if the turret is is being block by the player 
+    /// </summary>
     void inNotBlock()
     {
         int laymask = LayerMask.NameToLayer("Walls");

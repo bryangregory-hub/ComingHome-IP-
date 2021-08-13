@@ -1,3 +1,12 @@
+/******************************************************************************
+Author: Bryan Gregory
+
+Name of Class: pick up
+
+Description of Class: This scripts is ment for testing pick up which is not moved to InterctbleObject.cs
+
+Date Created: 03/08/2021
+******************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

@@ -1,3 +1,12 @@
+/******************************************************************************
+Author: Bryan Gregory
+
+Name of Class: Teleport
+
+Description of Class: This scripts would teleport the player to different position in the game
+
+Date Created: 03/08/2021
+******************************************************************************/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +32,10 @@ public class Teleport : MonoBehaviour
         }
         
     }
+    /// <summary>
+    /// when player steps on teleporter a loading screen will apear
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator Transition()
     {
         transScreen.SetActive(true);

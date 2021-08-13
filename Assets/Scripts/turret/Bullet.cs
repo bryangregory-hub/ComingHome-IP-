@@ -1,3 +1,13 @@
+/******************************************************************************
+Author: Bryan Gregory
+
+Name of Class: Bullet
+
+Description of Class: This scripts work with turret as the turrent fires it spawn the bullet
+
+Date Created: 03/08/2021
+******************************************************************************/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +24,9 @@ public class Bullet : MonoBehaviour
 	}
 
 	// Update is called once per frame
+	/// <summary>
+	/// find the tag and fly to it .
+	/// </summary>
 	void Update()
 	{
 
@@ -37,6 +50,10 @@ public class Bullet : MonoBehaviour
 		transform.LookAt(target);
 
 	}
+	/// <summary>
+	/// when gameboject touch player/enemy tag destroy it 
+	/// </summary>
+	/// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag=="Player")
