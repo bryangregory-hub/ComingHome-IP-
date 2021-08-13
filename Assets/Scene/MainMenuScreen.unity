@@ -3249,8 +3249,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Assets taken from the unity asset store, CGtrader, \nand Mixamo.\n\nMusic
-    taken from Youtube\n\nHandmade models referenced from artstation\n\nUI sprite
-    made in Photoshop\n\nGame made by Nicholas and Bryan\n\n\n"
+    taken from Youtube,FreeSoundEffects and free sound\n\nHandmade models referenced
+    from artstation\n\nUI sprite made in Photoshop\n\nGame made by Nicholas and Bryan\n\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -4112,9 +4112,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Press "e" to talk to NPcs
+  m_text: 'Press "e" to interact with objects
 
-    Press "Tab" to open quest log'
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
